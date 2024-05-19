@@ -13,4 +13,5 @@ body {
   box-sizing: border-box;
   font-family: "Josefin Sans", sans-serif;
   border-style: none;
+  list-style: none;
 }

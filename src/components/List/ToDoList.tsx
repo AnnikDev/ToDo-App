@@ -11,8 +11,9 @@ export default function ToDo() {
   const [todos, setTodos] = useState<TTodo[]>([]);
 
   const addTodo = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key == "Enter") {
-      const inputElement = event.target as HTMLInputElement;
+    const inputElement = event.target as HTMLInputElement;
+
+    if (event.key == "Enter" && inputElement.value.trim() !== "") {
       setTodos([
         ...todos,
         { id: Math.random(), title: inputElement.value, isDone: false },
@@ -20,18 +21,56 @@ export default function ToDo() {
       inputElement.value = "";
     }
   };
+
+  const deleteTodo = (todoId: number): void => {
+    const deleteIndex = todos.findIndex((item) => item.id == todoId);
+    todos.splice(deleteIndex, 1);
+    setTodos([...todos]);
+  };
+
+  const markTodo = (todoId: number): void => {
+    const markIndex = todos.findIndex((item) => item.id == todoId);
+    todos[markIndex].isDone = !todos[markIndex].isDone;
+    setTodos([...todos]);
+  };
+
   return (
     <>
       {" "}
-      <div>
+      <div className="container">
         <div className="title">
           <h1>TODO</h1>
           <img src="/images/icon-moon.svg" alt="" />
         </div>
-        <input placeholder="Create a new todo…" onKeyDown={addTodo} />
+        <input
+          className="newTodo"
+          placeholder="Create a new todo…"
+          onKeyDown={addTodo}
+        />
         <ul>
           {todos.map((item: TTodo) => (
-            <li key={item.id}>{item.title}</li>
+            <li
+              style={{ textDecoration: item.isDone ? "line-through" : "" }}
+              key={item.id}
+            >
+              <input
+                className="checkBox"
+                type="checkbox"
+                name=""
+                id=""
+                onChange={() => markTodo(item.id)}
+              />
+              {item.title}
+              <button onClick={() => deleteTodo(item.id)}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                  <path
+                    fill="#494C6B"
+                    fill-rule="evenodd"
+                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                  />
+                </svg>
+              </button>
+            </li>
           ))}
         </ul>
       </div>

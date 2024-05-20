@@ -75,6 +75,15 @@ export default function ToDo() {
             </li>
           ))}
         </ul>
+        <div className="todoFilter">
+          <span>5 items left</span>
+          <div className="todoTypes">
+            <span>ALL</span>
+            <span>Active</span>
+            <span>Completed</span>
+          </div>
+          <span>Clear Completed</span>
+        </div>
       </div>
       <div></div>
     </>

@@ -46,6 +46,34 @@ li {
   cursor: pointer;
 }
 
-button{
-    cursor: pointer;
+button {
+  cursor: pointer;
 }
+
+.todoFilter {
+  font-size: 1.8rem;
+  letter-spacing: -0.019rem;
+  color: #9495a5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  height: 5rem;
+
+  span {
+    cursor: pointer;
+  }
+}
+
+.todoFilter span:hover{
+    color: #494c6b;
+}
+
+.todoTypes{
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: space-around;
+    width: 16.6rem;
+}
+
+

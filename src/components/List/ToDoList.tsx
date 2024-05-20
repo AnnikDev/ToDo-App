@@ -56,12 +56,8 @@ export default function ToDo() {
   return (
     <>
       <div>
-        <img
-          className="bgLightCover"
-          src="/images/bg-desktop-light.jpg"
-          alt=""
-        />
-        <img className="bgDarkCover" src="/images/bg-desktop-dark.jpg" alt="" />
+        <div className="bgLightCover "></div>
+        <div className="bgDarkCover "></div>
       </div>
       <div className="container">
         <div className="title">
@@ -103,7 +99,12 @@ export default function ToDo() {
           ))}
         </ul>
         <div className="todoFilter">
-          <span>{remainingTodosCount} items left</span>
+          <span className="counter">{remainingTodosCount} items left</span>
+          <div className="empty"></div>
+          <span className="clearCompleted" onClick={clearCompleted}>
+            Clear Completed
+          </span>
+
           <div className="todoTypes">
             <span
               onClick={() => setFilter("ALL")}
@@ -124,9 +125,6 @@ export default function ToDo() {
               Completed
             </span>
           </div>
-          <span className="clearCompleted" onClick={clearCompleted}>
-            Clear Completed
-          </span>
         </div>
         <p className="instruction">Drag and drop to reorder list</p>
       </div>

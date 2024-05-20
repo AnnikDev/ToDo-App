@@ -36,7 +36,9 @@ export default function ToDo() {
 
   return (
     <>
-      {" "}
+      <div>
+        <img src="/images/bg-desktop-light.jpg" alt="" />
+      </div>
       <div className="container">
         <div className="title">
           <h1>TODO</h1>

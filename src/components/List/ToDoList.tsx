@@ -37,12 +37,12 @@ export default function ToDo() {
   return (
     <>
       <div>
-        <img src="/images/bg-desktop-light.jpg" alt="" />
+        <img className="bgCover" src="/images/bg-desktop-light.jpg" alt="" />
       </div>
       <div className="container">
         <div className="title">
           <h1>TODO</h1>
-          <img src="/images/icon-moon.svg" alt="" />
+          <img className="modeIcon" src="/images/icon-moon.svg" alt="" />
         </div>
         <input
           className="newTodo"
@@ -59,12 +59,21 @@ export default function ToDo() {
                 className="checkBox"
                 type="checkbox"
                 name=""
-                id=""
                 onChange={() => markTodo(item.id)}
+                id={`todo-${item.id}`}
               />
+              <label
+                htmlFor={`todo-${item.id}`}
+                className="custom-checkbox"
+              ></label>
               {item.title}
               <button onClick={() => deleteTodo(item.id)}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                <svg
+                  className="deleteTodo"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                >
                   <path
                     fill="#494C6B"
                     fill-rule="evenodd"

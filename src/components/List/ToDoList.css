@@ -1,6 +1,5 @@
-.container {
-  width: 54rem;
-  margin: auto;
+.bgCover {
+  width: 100%;
 }
 
 h1 {
@@ -9,7 +8,30 @@ h1 {
   color: #fff;
 }
 
+.modeIcon {
+  height: 2.6rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4.8rem;
+}
+
+.container {
+  width: 54rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .newTodo {
+  padding: 2rem;
   width: 54rem;
   height: 6.4rem;
   border-radius: 0.5rem;
@@ -41,13 +63,44 @@ li {
 }
 
 .checkBox {
-  border: 1px solid #ccc;
+  display: none;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: white;
+  position: relative;
   cursor: pointer;
 }
 
-button {
+.custom-checkbox::after {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #494c6b;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease;
+}
+
+input[type="checkbox"]:checked + .custom-checkbox::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+.deleteTodo {
   cursor: pointer;
+  display: none;
+}
+
+li:hover .deleteTodo {
+  display: inline-block;
 }
 
 .todoFilter {
@@ -65,15 +118,13 @@ button {
   }
 }
 
-.todoFilter span:hover{
-    color: #494c6b;
+.todoFilter span:hover {
+  color: #494c6b;
 }
 
-.todoTypes{
-    font-size: 1.8rem;
-    display: flex;
-    justify-content: space-around;
-    width: 16.6rem;
+.todoTypes {
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: space-around;
+  width: 16.6rem;
 }
-
-

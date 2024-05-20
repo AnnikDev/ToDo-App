@@ -126,7 +126,7 @@ li.done {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fcfcfc;
-  mask: url(images/icon-check.svg) no-repeat center;
+  mask: url(/public/images/icon-check.svg) no-repeat center;
   mask-size: contain;
 }
 

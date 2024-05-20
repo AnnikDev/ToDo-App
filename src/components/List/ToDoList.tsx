@@ -9,6 +9,7 @@ type TTodo = {
 
 export default function ToDo() {
   const [todos, setTodos] = useState<TTodo[]>([]);
+  const [filter, setFilter] = useState<"ALL" | "Active" | "Completed">("ALL");
 
   const addTodo = (event: KeyboardEvent<HTMLInputElement>) => {
     const inputElement = event.target as HTMLInputElement;
@@ -23,16 +24,28 @@ export default function ToDo() {
   };
 
   const deleteTodo = (todoId: number): void => {
-    const deleteIndex = todos.findIndex((item) => item.id == todoId);
-    todos.splice(deleteIndex, 1);
-    setTodos([...todos]);
+    setTodos(todos.filter((item) => item.id !== todoId));
   };
 
   const markTodo = (todoId: number): void => {
-    const markIndex = todos.findIndex((item) => item.id == todoId);
-    todos[markIndex].isDone = !todos[markIndex].isDone;
-    setTodos([...todos]);
+    setTodos(
+      todos.map((item) =>
+        item.id === todoId ? { ...item, isDone: !item.isDone } : item
+      )
+    );
   };
+
+  const clearCompleted = (): void => {
+    setTodos(todos.filter((item) => !item.isDone));
+  };
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "Active") return !todo.isDone;
+    if (filter === "Completed") return todo.isDone;
+    return true;
+  });
+
+  const remainingTodosCount = todos.filter((todo) => !todo.isDone).length;
 
   return (
     <>
@@ -50,51 +63,59 @@ export default function ToDo() {
           onKeyDown={addTodo}
         />
         <ul>
-          {todos.map((item: TTodo) => (
-            <li
-              style={{ textDecoration: item.isDone ? "line-through" : "" }}
-              key={item.id}
-            >
-              <input
-                className="checkBox"
-                type="checkbox"
-                name=""
-                onChange={() => markTodo(item.id)}
-                id={`todo-${item.id}`}
-              />
-              <label htmlFor={`todo-${item.id}`} className="custom-checkbox">
-                {" "}
-                <span className="checked-icon"></span>
-              </label>
-              {item.title}
+          {filteredTodos.map((item: TTodo) => (
+            <li className={item.isDone ? "done" : ""} key={item.id}>
+              <div className="listTitle">
+                <input
+                  className="checkBox"
+                  type="checkbox"
+                  checked={item.isDone}
+                  onChange={() => markTodo(item.id)}
+                  id={`todo-${item.id}`}
+                />
+                <label htmlFor={`todo-${item.id}`} className="custom-checkbox">
+                  <span className="checked-icon"></span>
+                </label>
+                {item.title}
+              </div>
               <button onClick={() => deleteTodo(item.id)}>
-                <svg
+                <img
                   className="deleteTodo"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                >
-                  <path
-                    fill="#494C6B"
-                    fill-rule="evenodd"
-                    d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                  />
-                </svg>
+                  src="/images/icon-cross.svg"
+                  alt=""
+                />
               </button>
             </li>
           ))}
         </ul>
         <div className="todoFilter">
-          <span>5 items left</span>
+          <span>{remainingTodosCount} items left</span>
           <div className="todoTypes">
-            <span>ALL</span>
-            <span>Active</span>
-            <span>Completed</span>
+            <span
+              onClick={() => setFilter("ALL")}
+              className={filter === "ALL" ? "active" : ""}
+            >
+              ALL
+            </span>
+            <span
+              onClick={() => setFilter("Active")}
+              className={filter === "Active" ? "active" : ""}
+            >
+              Active
+            </span>
+            <span
+              onClick={() => setFilter("Completed")}
+              className={filter === "Completed" ? "active" : ""}
+            >
+              Completed
+            </span>
           </div>
-          <span>Clear Completed</span>
+          <span className="clearCompleted" onClick={clearCompleted}>
+            Clear Completed
+          </span>
         </div>
+        <p className="instruction">Drag and drop to reorder list</p>
       </div>
-      <div></div>
     </>
   );
 }

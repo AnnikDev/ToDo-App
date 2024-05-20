@@ -10,6 +10,7 @@ type TTodo = {
 export default function ToDo() {
   const [todos, setTodos] = useState<TTodo[]>([]);
   const [filter, setFilter] = useState<"ALL" | "Active" | "Completed">("ALL");
+  const [darkMode, setDarkMode] = useState(false);
 
   const addTodo = (event: KeyboardEvent<HTMLInputElement>) => {
     const inputElement = event.target as HTMLInputElement;
@@ -47,15 +48,28 @@ export default function ToDo() {
 
   const remainingTodosCount = todos.filter((todo) => !todo.isDone).length;
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle("dark-mode", !darkMode);
+  };
+
   return (
     <>
       <div>
-        <img className="bgCover" src="/images/bg-desktop-light.jpg" alt="" />
+        <img
+          className="bgLightCover"
+          src="/images/bg-desktop-light.jpg"
+          alt=""
+        />
+        <img className="bgDarkCover" src="/images/bg-desktop-dark.jpg" alt="" />
       </div>
       <div className="container">
         <div className="title">
           <h1>TODO</h1>
-          <img className="modeIcon" src="/images/icon-moon.svg" alt="" />
+          <button className="modeIcon" onClick={toggleDarkMode}>
+            <img className="moon" src="/images/icon-moon.svg" alt="" />
+            <img className="sun" src="/images/icon-sun.svg" alt="" />
+          </button>
         </div>
         <input
           className="newTodo"

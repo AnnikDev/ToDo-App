@@ -1,5 +1,9 @@
-.bgCover {
+.bgLightCover {
   width: 100%;
+}
+
+.bgDarkCover {
+  display: none;
 }
 
 h1 {
@@ -10,6 +14,10 @@ h1 {
 
 .modeIcon {
   height: 2.6rem;
+}
+
+.sun {
+  display: none;
 }
 
 .title {
@@ -181,9 +189,85 @@ li:hover .deleteTodo {
   }
 }
 
+.todoTypes span:hover {
+  color: #494c6b;
+}
+
 .instruction {
   font-size: 1.4rem;
   text-align: center;
   color: #9495a5;
   margin-top: 5rem;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #171823;
+
+  .bgLightCover {
+    display: none;
+  }
+
+  .bgDarkCover {
+    display: block;
+    width: 100%;
+  }
+
+  .moon {
+    display: none;
+  }
+
+  .sun {
+    display: block;
+  }
+
+  .newTodo {
+    background-color: #25273d;
+    color: #c8cbe7;
+    box-shadow: 0 35px 50px -15px rgba(0, 0, 0, 0.5);
+    background-color: #25273d;
+  }
+
+  li {
+    background-color: #25273d;
+    color: #c8cbe7;
+    box-shadow: 0 35px 50px -15px rgba(0, 0, 0, 0.5);
+    border-bottom: 0.1rem solid #393a4b;
+  }
+
+  .custom-checkbox::before {
+    background: linear-gradient(135deg, #5df, #c058f3);
+  }
+
+  .custom-checkbox::after {
+    background-color: #25273d;
+  }
+
+  .todoFilter {
+    background-color: #25273d;
+  }
+
+  .todoFilter span {
+    color: #5b5e7e;
+  }
+
+  .todoTypes span {
+    color: #5b5e7e;
+  }
+
+  .todoTypes span.active {
+    color: #3a7cfd;
+  }
+
+  .todoTypes span:hover {
+    color: #e3e4f1;
+  }
+
+  .clearCompleted:hover {
+    color: #e3e4f1;
+  }
+
+  .instruction {
+    color: #5b5e7e;
+  }
 }

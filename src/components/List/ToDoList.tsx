@@ -62,10 +62,10 @@ export default function ToDo() {
                 onChange={() => markTodo(item.id)}
                 id={`todo-${item.id}`}
               />
-              <label
-                htmlFor={`todo-${item.id}`}
-                className="custom-checkbox"
-              ></label>
+              <label htmlFor={`todo-${item.id}`} className="custom-checkbox">
+                {" "}
+                <span className="checked-icon"></span>
+              </label>
               {item.title}
               <button onClick={() => deleteTodo(item.id)}>
                 <svg
